@@ -1,16 +1,14 @@
 package main
 
 import (
+	"fmt"
+
 	"github.com/chehsunliu/poker"
 )
 
 type Player struct {
 	Name  string
 	Cards []poker.Card
-}
-
-/* func (p *Player) Deal(cards *[]Card) {
-	p.Cards, *cards = (*cards)[0:2], (*cards)[2:]
 }
 
 func (p *Player) Print() {
@@ -20,4 +18,4 @@ func (p *Player) Print() {
 	} else {
 		printCards(p.Cards)
 	}
-} */
+}
