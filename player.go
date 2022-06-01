@@ -7,6 +7,7 @@ import (
 )
 
 type Player struct {
+	Id    int
 	Name  string
 	Cards []poker.Card
 }

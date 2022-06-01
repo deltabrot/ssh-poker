@@ -1,6 +1,9 @@
 ssh-poker
 ssh-poker.exe
 
+server_key
+server_key.pub
+
 # Unneeded directories
 logs/
 *.log
