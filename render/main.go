@@ -1,4 +1,4 @@
-package main
+package render
 
 import (
 	"fmt"
@@ -69,7 +69,7 @@ func getSimplePrintBuffer(card poker.Card) string {
 	return printBuffer
 }
 
-func printCards(cards []poker.Card) {
+func PrintCards(cards []poker.Card) {
 	for i := 0; i < 7; i++ {
 		for _, card := range cards {
 			fmt.Print(getPrintBuffer(card)[i] + " ")
@@ -79,7 +79,7 @@ func printCards(cards []poker.Card) {
 	fmt.Println()
 }
 
-func printSimpleCards(cards []poker.Card) {
+func PrintSimpleCards(cards []poker.Card) {
 	for _, card := range cards {
 		fmt.Print(getSimplePrintBuffer(card) + " ")
 	}
@@ -87,7 +87,7 @@ func printSimpleCards(cards []poker.Card) {
 	fmt.Println()
 }
 
-func getCardsAscii(cards []poker.Card) string {
+func GetCardsAscii(cards []poker.Card) string {
 	ascii := ""
 	for i := 0; i < 7; i++ {
 		for j, card := range cards {
@@ -102,7 +102,7 @@ func getCardsAscii(cards []poker.Card) string {
 	return ascii
 }
 
-func getSimpleCardsAscii(cards []poker.Card) string {
+func GetSimpleCardsAscii(cards []poker.Card) string {
 	ascii := ""
 	for _, card := range cards {
 		ascii += getSimplePrintBuffer(card) + " "
