@@ -15,6 +15,7 @@ type Player struct {
 	Chips int
 }
 
+// NewPlayer initialises a new Player pointer.
 func NewPlayer(name string) *Player {
 	return &Player{
 		Id:   uuid.New().String(),

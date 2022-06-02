@@ -16,9 +16,10 @@ import (
 var simple = true
 
 func main() {
+	// create casino
 	casino := casino.New()
 
-	// TEST: create new currentGame
+	// create new game
 	casino.CreateNewGame()
 
 	handleSsh(casino)
@@ -36,14 +37,20 @@ func main() {
 func handleSsh(casino *casino.Casino) {
 	ssh.Handle(func(s ssh.Session) {
 		defer s.Close()
+
+		// alert server a new connection has been made
 		fmt.Printf("\033[0;33m'%s' has connected\033[0m\n", s.User())
+
+		// greet new player
 		// io.WriteString(s, fmt.Sprintf("Hello %s\n", s.User()))
 
-		// find currentGame
+		// find random game
 		currentGame := casino.GetGameById(casino.GetRandomGameId())
 
 		// create player entity
 		player := game.NewPlayer(s.User())
+
+		// add player to currentGame
 		currentGame.AddPlayer(player)
 
 		term := terminal.NewTerminal(s, "")
@@ -56,12 +63,14 @@ func handleSsh(casino *casino.Casino) {
 					break
 				}
 
+				// check
 				if line == "/c" {
 					fmt.Printf("%s: \"%s\"\n", s.User(), line)
 					currentGame.Chat.AddMessage("", fmt.Sprintf("'%s' checked", s.User()))
 					continue
 				}
 
+				// draw card
 				if line == "/d" {
 					currentGame.Cards = append(currentGame.Cards, currentGame.Deck.Draw(1)...)
 					handAscii := render.GetCardsAscii(currentGame.Cards)
@@ -76,13 +85,13 @@ func handleSsh(casino *casino.Casino) {
 					continue
 				}
 
-				fmt.Printf("%s: \"%s\"\n", s.User(), line)
+				// fmt.Printf("hehehe%s: \"%s\"\n", s.User(), line)
 				currentGame.Chat.AddMessage(s.User(), line)
 
 				io.WriteString(s, "\033[11;1H")
 				io.WriteString(s, currentGame.Chat.GetMessages(5))
 				io.WriteString(s, fmt.Sprintf("[%s] ", s.User()))
-				time.Sleep(1000 * time.Millisecond)
+				time.Sleep(100 * time.Millisecond)
 			}
 		}()
 
@@ -97,7 +106,7 @@ func handleSsh(casino *casino.Casino) {
 			io.WriteString(s, "\033[11;1H")
 			io.WriteString(s, currentGame.Chat.GetMessages(5))
 			io.WriteString(s, fmt.Sprintf("[%s] ", s.User()))
-			time.Sleep(1000 * time.Millisecond)
+			time.Sleep(100 * time.Millisecond)
 		}
 	})
 

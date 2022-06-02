@@ -19,6 +19,8 @@ var (
 	}
 )
 
+// getPrintBuffer uses the passed list of cards to generate a string such that
+// they can be rendered in order, using multiple lines.
 func getPrintBuffer(card poker.Card) []string {
 	var startColor string
 	if card.Suit() == 2 || card.Suit() == 4 {
@@ -48,6 +50,8 @@ func getPrintBuffer(card poker.Card) []string {
 	return printBuffer
 }
 
+// getSimplePrintBuffer uses the passed list of cards to generate a string such
+// that they can be rendered in order, using a single line.
 func getSimplePrintBuffer(card poker.Card) string {
 	var startColor string
 	if card.Suit() == 2 || card.Suit() == 4 {
@@ -69,6 +73,8 @@ func getSimplePrintBuffer(card poker.Card) string {
 	return printBuffer
 }
 
+// PrintCards prints full size playing cards in the terminal complete with
+// color.
 func PrintCards(cards []poker.Card) {
 	for i := 0; i < 7; i++ {
 		for _, card := range cards {
@@ -79,6 +85,8 @@ func PrintCards(cards []poker.Card) {
 	fmt.Println()
 }
 
+// PrintSimpleCards prints small playing cards in the terminal complete with
+// color.
 func PrintSimpleCards(cards []poker.Card) {
 	for _, card := range cards {
 		fmt.Print(getSimplePrintBuffer(card) + " ")
@@ -87,6 +95,8 @@ func PrintSimpleCards(cards []poker.Card) {
 	fmt.Println()
 }
 
+// GetCardsAscii retrieves a string which when output in a terminal would
+// display full size playing cards in order complete with color.
 func GetCardsAscii(cards []poker.Card) string {
 	ascii := ""
 	for i := 0; i < 7; i++ {
@@ -102,6 +112,8 @@ func GetCardsAscii(cards []poker.Card) string {
 	return ascii
 }
 
+// GetSimpleCardsAscii retrieves a string which when output in a terminal would
+// display small playing cards in order complete with color.
 func GetSimpleCardsAscii(cards []poker.Card) string {
 	ascii := ""
 	for _, card := range cards {

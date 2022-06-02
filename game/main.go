@@ -28,7 +28,7 @@ type Game struct {
 	Chat        *chat.Chat
 }
 
-// New initialises a new game pointer.
+// New initialises a new Game pointer.
 func New(turnTimeout time.Duration) *Game {
 	return &Game{
 		Deck:        poker.NewDeck(),
